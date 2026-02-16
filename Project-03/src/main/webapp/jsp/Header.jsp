@@ -65,7 +65,7 @@
 				<%
 					if (userLoggedIn) {
 				%>
-				<% 
+				<%
 					if (userDto.getRoleId() == RoleDTO.STUDENT) {
 				%>
 				<li class="nav-item dropdown"><a

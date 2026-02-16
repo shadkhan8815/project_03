@@ -1,2 +1,16 @@
+# Eclipse metadata
 /.metadata/
+
+# Build output
 /target/
+
+# MySQL database files
+mysql-data/
+*.sock
+*.pid
+*.cnf
+*.err
+
+# Optional: OS generated files
+.DS_Store
+Thumbs.db

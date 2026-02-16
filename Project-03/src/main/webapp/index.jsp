@@ -9,13 +9,13 @@
 	padding-top: 1px;
 }
 
-.s2 {
+body {
 	background-image: url('img/amit.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 </style>
-<body class="s2">
+<body class="img-fluids">
 	<div class="p1">
 		<h1 align="Center">
 			<img src="img/custom.png" width="318" height="120" border="0">

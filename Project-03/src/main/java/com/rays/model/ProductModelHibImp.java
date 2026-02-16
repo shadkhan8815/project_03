@@ -34,6 +34,7 @@ public class ProductModelHibImp implements ProductModelInt {
 				tx.rollback();
 
 			}
+			HibDataSource.handleException(e);
 			throw new ApplicationException("Exception in college Add " + e.getMessage());
 		} finally {
 			session.close();

@@ -151,7 +151,6 @@ public class UserListCtl extends BaseCtl {
 				} else if (OP_NEXT.equalsIgnoreCase(op)) {
 					pageNo++;
 				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
-					System.out.println("Hello Privaous ");
 					pageNo--;
 				}
 

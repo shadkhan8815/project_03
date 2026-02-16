@@ -15,6 +15,8 @@
 }
 
 .cl {
+	font-family: Lucida Calligraphy;
+	font-family: Monotype Corsiva;
 	font-family: Footlight MT Light;
 }
 </style>

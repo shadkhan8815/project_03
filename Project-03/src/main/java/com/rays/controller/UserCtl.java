@@ -225,44 +225,30 @@ public class UserCtl extends BaseCtl {
 
 			try {
 				if (id > 0) {
+					dto.setId(id);
 					model.update(dto);
-					ServletUtility.setSuccessMessage("Data is successfully Updated", request);
+					ServletUtility.setDto(dto, request);
+
+					ServletUtility.setSuccessMessage("Record Successfully Updated", request);
+
 				} else {
-
-					try {
-						model.add(dto);
-						ServletUtility.setSuccessMessage("Data is successfully saved", request);
-					} catch (ApplicationException e) {
-						log.error(e);
-						ServletUtility.handleException(e, request, response);
-						return;
-					} catch (DuplicateRecordException e) {
-						ServletUtility.setDto(dto, request);
-						ServletUtility.setErrorMessage("Login id already exists", request);
-					}
-
+					System.out.println("college add" + dto + "id...." + id);
+					// long pk
+					model.add(dto);
+					ServletUtility.setSuccessMessage("Record Successfully Saved", request);
 				}
 				ServletUtility.setDto(dto, request);
 
 			} catch (ApplicationException e) {
+				e.printStackTrace();
 				log.error(e);
-				ServletUtility.handleException(e, request, response);
+				ServletUtility.setErrorMessage(e.getMessage(), request);
+				ServletUtility.forward(getView(), request, response);
+
 				return;
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setDto(dto, request);
-				ServletUtility.setErrorMessage("Login id already exists", request);
-			}
-		} else if (OP_DELETE.equalsIgnoreCase(op)) {
-
-			UserDTO dto = (UserDTO) populateDTO(request);
-			try {
-				model.delete(dto);
-				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
-				return;
-			} catch (ApplicationException e) {
-				log.error(e);
-				ServletUtility.handleException(e, request, response);
-				return;
+				ServletUtility.setErrorMessage("User Already Exists", request);
 			}
 
 		} else if (OP_CANCEL.equalsIgnoreCase(op)) {

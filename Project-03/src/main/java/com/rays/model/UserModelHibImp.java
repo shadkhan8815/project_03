@@ -12,6 +12,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.JDBCConnectionException;
 
 import com.rays.dto.UserDTO;
 import com.rays.exception.ApplicationException;
@@ -60,7 +61,8 @@ public class UserModelHibImp implements UserModelInt {
 				tx.rollback();
 
 			}
-			throw new ApplicationException("Exception in User Add " + e.getMessage());
+			HibDataSource.handleException(e);
+			throw new ApplicationException("Exception in User Add" + e.getMessage());
 		} finally {
 			session.close();
 		}
@@ -95,7 +97,7 @@ public class UserModelHibImp implements UserModelInt {
 		UserDTO existDto = findByLogin(dto.getLogin());
 		// Check if updated LoginId already exist
 		if (existDto != null && existDto.getId() != dto.getId()) {
-			 throw new DuplicateRecordException("LoginId is already exist");
+			throw new DuplicateRecordException("LoginId is already exist");
 		}
 
 		try {
@@ -107,7 +109,8 @@ public class UserModelHibImp implements UserModelInt {
 			if (tx != null) {
 				tx.rollback();
 			}
-			throw new ApplicationException("Exception in User update" + e.getMessage());
+			HibDataSource.handleException(e);
+			throw new ApplicationException("Exception in User Add" + e.getMessage());
 		} finally {
 			session.close();
 		}
@@ -144,7 +147,7 @@ public class UserModelHibImp implements UserModelInt {
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			throw new ApplicationException("Exception in getting User by Login " + e.getMessage());
+			HibDataSource.handleException(e);
 
 		} finally {
 			session.close();
@@ -251,17 +254,33 @@ public class UserModelHibImp implements UserModelInt {
 		System.out.println(login + "kkkkk" + password);
 		Session session = null;
 		UserDTO dto = null;
-		session = HibDataSource.getSession();
-		Query q = session.createQuery("from UserDTO where login=? and password=?");
-		q.setString(0, login);
-		q.setString(1, password);
-		List list = q.list();
-		if (list.size() > 0) {
-			dto = (UserDTO) list.get(0);
-		} else {
-			dto = null;
+		try {
 
+			session = HibDataSource.getSession();
+
+			Query q = session.createQuery("from UserDTO where login=? and password=?");
+
+			q.setString(0, login);
+			q.setString(1, password);
+
+			List list = q.list();
+
+			if (list.size() > 0) {
+				dto = (UserDTO) list.get(0);
+			}
+
+		} catch (JDBCConnectionException e) {
+
+			System.out.println(" Database connection problem");
+			e.printStackTrace();
+			HibDataSource.handleException(e);
+		} finally {
+
+			if (session != null) {
+				session.close();
+			}
 		}
+
 		return dto;
 	}
 
