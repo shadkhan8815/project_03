@@ -59,10 +59,10 @@ public class UserModelHibImp implements UserModelInt {
 			// TODO: handle exception
 			if (tx != null) {
 				tx.rollback();
-
+				
+				HibDataSource.handleException(e);
 			}
-			HibDataSource.handleException(e);
-			throw new ApplicationException("Exception in User Add" + e.getMessage());
+			throw new ApplicationException("Database Server is down. Please try after some time..!");
 		} finally {
 			session.close();
 		}

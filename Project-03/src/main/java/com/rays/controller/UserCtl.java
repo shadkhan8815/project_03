@@ -241,11 +241,12 @@ public class UserCtl extends BaseCtl {
 
 			} catch (ApplicationException e) {
 				e.printStackTrace();
-				log.error(e);
+				log.error("Database Errore");
 				ServletUtility.setErrorMessage(e.getMessage(), request);
+				//ServletUtility.handleException(e, request, response);
 				ServletUtility.forward(getView(), request, response);
-
 				return;
+				
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setDto(dto, request);
 				ServletUtility.setErrorMessage("User Already Exists", request);

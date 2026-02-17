@@ -117,7 +117,6 @@ public class ProductCtl extends BaseCtl {
 
 				} else {
 					System.out.println("college add" + dto + "id...." + id);
-					// long pk
 					model.add(dto);
 					ServletUtility.setSuccessMessage("Record Successfully Saved", request);
 				}
@@ -125,11 +124,12 @@ public class ProductCtl extends BaseCtl {
 
 			} catch (ApplicationException e) {
 				e.printStackTrace();
-				log.error(e);
-				ServletUtility.setErrorMessage(e.getMessage(), request);
+				log.error("Database Errore");
+				ServletUtility.setErrorMessage("Database Server is down. Please try after some time..!", request);
+				//ServletUtility.handleException(e, request, response);
 				ServletUtility.forward(getView(), request, response);
-
 				return;
+				
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setDto(dto, request);
 				ServletUtility.setErrorMessage("ProductName Already Exists", request);
