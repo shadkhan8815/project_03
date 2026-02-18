@@ -148,7 +148,7 @@ public class EmployeeCtl extends BaseCtl {
 			    ServletUtility.setErrorMessage("Username Already Exists", request);
 			}
 
-			ServletUtility.forward(getView(), request, response);
+		//	ServletUtility.forward(getView(), request, response);
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.EMPLOYEE_CTL, request, response);
 			return;
