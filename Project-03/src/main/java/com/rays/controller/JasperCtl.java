@@ -45,10 +45,11 @@ public class JasperCtl extends BaseCtl {
 
 			ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.project_3.bundle.system");
 
-			InputStream jrxmlStream = getClass().getClassLoader().getResourceAsStream("report/Proj-03.jrxml");
+			String jasperpath = request.getServletContext().getRealPath("/jasper/Proj-03.jrxml");
 
-			JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
+			System.out.println("JRXML Path = " + jasperpath);
 
+			JasperReport jasperReport = JasperCompileManager.compileReport(jasperpath);
 			/*
 			 * Compilation of jrxml file JasperReport jasperReport =
 			 * JasperCompileManager.compileReport(rb.getString("jasperctl"));
@@ -86,7 +87,7 @@ public class JasperCtl extends BaseCtl {
 			response.getOutputStream().flush();
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
