@@ -5,7 +5,8 @@
 <%@page import="com.rays.util.DataUtility"%>
 <%@page import="com.rays.util.ServletUtility"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 	"http://www.w3.org/TR/html4/loose.dtd">
 
@@ -48,15 +49,20 @@
 			<%
 				int pageNo = ServletUtility.getPageNo(request);
 				int pageSize = ServletUtility.getPageSize(request);
+
 				int index = ((pageNo - 1) * pageSize) + 1;
-				int nextPageSize = DataUtility.getInt(request.getAttribute("nextListSize").toString());
+
+				int nextPageSize = 0;
+				if (request.getAttribute("nextListSize") != null) {
+					nextPageSize = DataUtility.getInt(request.getAttribute("nextListSize").toString());
+				}
 
 				List list = ServletUtility.getList(request);
-				Iterator<EmployeeDTO> it = list.iterator();
-			%>
+				if (list == null) {
+					list = new java.util.ArrayList();
+				}
 
-			<%
-				if (list.size() != 0) {
+				Iterator<EmployeeDTO> it = list.iterator();
 			%>
 
 			<center>
@@ -71,11 +77,10 @@
 				<%
 					if (!ServletUtility.getSuccessMessage(request).equals("")) {
 				%>
-				<div class="col-md-4 alert alert-success alert-dismissible"
-					style="background-color: #80ff80">
+				<div class="col-md-4 alert alert-success alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					<h4>
-						<font color="#008000"> <%=ServletUtility.getSuccessMessage(request)%>
+						<font color="green"> <%=ServletUtility.getSuccessMessage(request)%>
 						</font>
 					</h4>
 				</div>
@@ -104,9 +109,12 @@
 				<div class="col-md-4"></div>
 			</div>
 
+			<%
+				if (list.size() != 0) {
+			%>
+
 			<!-- Search Panel -->
 			<div class="row">
-
 				<div class="col-sm-3"></div>
 
 				<div class="col-sm-2">
@@ -120,12 +128,6 @@
 						class="form-control"
 						value="<%=ServletUtility.getParameter("username", request)%>">
 				</div>
-
-				<%-- <div class="col-sm-2">
-		<input type="text" name="contactNo"
-			placeholder="Enter Contact No" class="form-control"
-			value="<%=ServletUtility.getParameter("contactNo", request)%>">
-	</div> --%>
 
 				<div class="col-sm-3">
 					<input type="submit" class="btn btn-primary btn-md"
@@ -205,22 +207,19 @@
 			<%
 				} else {
 			%>
-
-			<center>
+			<!-- <center>
 				<h1 style="font-size: 40px; color: #162390;">Employee List</h1>
 			</center>
 
 			<br>
-
+ -->
 			<div style="padding-left: 48%;">
 				<input type="submit" name="operation" class="btn btn-primary btn-md"
 					value="<%=EmployeeListCtl.OP_BACK%>">
 			</div>
-
 			<%
 				}
 			%>
-
 			<input type="hidden" name="pageNo" value="<%=pageNo%>"> <input
 				type="hidden" name="pageSize" value="<%=pageSize%>">
 
@@ -228,6 +227,5 @@
 	</div>
 
 </body>
-
 <%@include file="FooterView.jsp"%>
 </html>

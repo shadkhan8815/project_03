@@ -172,9 +172,13 @@ public class EmployeeModelHibImpl implements EmployeeModelInt {
 			}
 			list = criteria.list();
 		} catch (HibernateException e) {
+	//		HibDataSource.handleException(e);
+
 			throw new ApplicationException("Exception in Employee search");
 		} finally {
-			session.close();
+			 if (session != null) {
+			        session.close();
+			    }
 		}
 
 		return list;

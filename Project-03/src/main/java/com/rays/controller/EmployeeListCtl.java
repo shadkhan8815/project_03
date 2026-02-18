@@ -73,10 +73,10 @@ public class EmployeeListCtl extends BaseCtl {
 			list = model.search(dto, pageNo, pageSize);
 			next = model.search(dto, pageNo + 1, pageSize);
 
-			if (list == null || list.size() == 0) {
-				ServletUtility.setErrorMessage("No record found", request);
+			if (list != null && list.size() == 0) {
+			    ServletUtility.setErrorMessage("No record found", request);
 			}
-
+			
 			if (next == null || next.size() == 0) {
 				request.setAttribute("nextListSize", 0);
 			} else {
@@ -88,10 +88,10 @@ public class EmployeeListCtl extends BaseCtl {
 			ServletUtility.setPageSize(pageSize, request);
 			ServletUtility.forward(getView(), request, response);
 
-		} catch (ApplicationException e) {
-			log.error(e);
-			ServletUtility.handleException(e, request, response);
-			return;
+		} catch (Exception e) {
+			log.error("Database Error", e);
+			ServletUtility.handleListDBDown(getView(), dto, pageNo, pageSize, request, response);
+		    return ;
 		}
 
 		log.debug("EmployeeListCtl doGet End");
