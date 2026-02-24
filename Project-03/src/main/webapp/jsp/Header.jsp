@@ -206,7 +206,7 @@
 						</a>
 					</div></li>
 
-				<li class="nav-item dropdown" style="padding-left: 5px"><a
+				<%-- <li class="nav-item dropdown" style="padding-left: 5px"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> <font style="color: white;">Product
@@ -218,16 +218,44 @@
 							class="fa fa-file"></i>Add Product</a> <a class="dropdown-item"
 							href="<%=ORSView.PRODUCT_LIST_CTL%>"><i class="fa fa-paste"></i>Product
 							List</a>
-					</div></li>
+					</div></li> --%>
 					
-					 <li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-					style="color: white;">Employee</a>
-					<div class="dropdown-menu">
+					
+					<li class="nav-item dropdown" style="padding-left: 5px"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> <font style="color: white;">Employee</font>
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="<%=ORSView.EMPLOYEE_CTL%>"><i
-							class="fa fa-user-plus"></i>Add Employee</a> <a class="dropdown-item"
-							href="<%=ORSView.EMPLOYEE_LIST_CTL%>"><i
-							class="fa fa-id-badge"></i>Employee List</a>
+							class="fa fa-calculator"></i>Add Employee</a> <a class="dropdown-item"
+							href="<%=ORSView.EMPLOYEE_LIST_CTL%>"> <i
+							class="fa fa-sort-amount-down"></i>Employee List
+						</a>
+					</div></li>
+
+					
+					<%--  <li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+					style="color: white;">LeaveManagment</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="<%=ORSView.LEAVE_MANAGMENT_CTL%>"><i
+							class="fa fa-user-plus"></i>Add LeaveManagmnet</a> <a class="dropdown-item"
+							href="<%=ORSView.LEAVE_MANAGMENT_LIST_CTL%>"><i
+							class="fa fa-id-badge"></i>LeaveManagment List</a>
+					</div></li> --%>
+					
+					<li class="nav-item dropdown" style="padding-left: 5px"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> <font style="color: white;">Complaint</font>
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="<%=ORSView.COMPLAINT_CTL%>"><i
+							class="fa fa-calculator"></i>Add Complaint</a> <a class="dropdown-item"
+							href="<%=ORSView.COMPLAINT_LIST_CTL%>"> <i
+							class="fa fa-sort-amount-down"></i>Complaint List
+						</a>
 					</div></li>
 
 				<%

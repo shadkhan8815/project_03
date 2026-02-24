@@ -28,7 +28,7 @@ public final class ModelFactory {
 		}
 		return mFactory;
 	}
-	
+
 	public EmployeeModelInt getEmployeeModel() {
 
 		EmployeeModelInt employeeModel = (EmployeeModelInt) modelCache.get("employeeModel");
@@ -44,7 +44,39 @@ public final class ModelFactory {
 
 		return employeeModel;
 	}
-	
+
+	public ComplaintModelInt getComplaintModel() {
+
+		ComplaintModelInt complaintModel = (ComplaintModelInt) modelCache.get("complaintModel");
+		if (complaintModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				complaintModel = new ComplaintModelHibImp();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				complaintModel = new ComplaintModelJDBCImp();
+			}
+			modelCache.put("complaintModel", complaintModel);
+		}
+
+		return complaintModel;
+	}
+
+	public LeaveManagmentInt getLeaveManagmentModel() {
+
+		LeaveManagmentInt leaveManagmentModel = (LeaveManagmentInt) modelCache.get("leaveManagmentModel");
+		if (leaveManagmentModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				leaveManagmentModel = new LeaveManagmentHibImp();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				leaveManagmentModel = new LeaveManagmentModelJDBCImpl();
+			}
+			modelCache.put("leaveManagmentModel", leaveManagmentModel);
+		}
+
+		return leaveManagmentModel;
+	}
+
 	public ProductModelInt getProductModel() {
 		ProductModelInt productModel = (ProductModelInt) modelCache.get("productModel");
 		if (productModel == null) {

@@ -1,16 +1,18 @@
-<%@page import="com.rays.controller.EmployeeCtl"%>
+<%@page import="com.rays.util.HTMLUtility"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.rays.controller.ComplaintCtl"%>
 <%@page import="com.rays.util.ServletUtility"%>
 <%@page import="com.rays.util.DataUtility"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Employee View</title>
+<title>Complaint View</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
@@ -39,11 +41,11 @@ i.css {
 	</div>
 
 	<main>
-	<form action="<%=ORSView.EMPLOYEE_CTL%>" method="post">
+	<form action="<%=ORSView.COMPLAINT_CTL%>" method="post">
 
 		<div class="row pt-3 pb-4">
 
-			<jsp:useBean id="dto" class="com.rays.dto.EmployeeDTO"
+			<jsp:useBean id="dto" class="com.rays.dto.ComplaintDTO"
 				scope="request" />
 
 			<div class="col-md-4 mb-4"></div>
@@ -56,11 +58,11 @@ i.css {
 							long id = DataUtility.getLong(request.getParameter("id"));
 							if (id > 0) {
 						%>
-						<h3 class="text-center text-primary">Update Employee</h3>
+						<h3 class="text-center text-primary">Update Complaint</h3>
 						<%
 							} else {
 						%>
-						<h3 class="text-center text-primary">Add Employee</h3>
+						<h3 class="text-center text-primary">Add Complaint</h3>
 						<%
 							}
 						%>
@@ -103,26 +105,8 @@ i.css {
 						<input type="hidden" name="modifiedDatetime"
 							value="<%=DataUtility.getTimestamp(dto.getModifiedDatetime())%>">
 
-						<!-- Full Name -->
-						<span class="pl-sm-5"><b>Full Name</b><span
-							style="color: red">*</span></span><br>
-						<div class="col-sm-12">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-user grey-text"></i>
-									</div>
-								</div>
-								<input type="text" name="fullName" class="form-control"
-									placeholder="Enter Full Name"
-									value="<%=DataUtility.getStringData(dto.getFullName())%>">
-							</div>
-						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("fullName", request)%>
-						</font><br>
-
-						<!-- Username -->
-						<span class="pl-sm-5"><b>Username</b><span
+						<!-- Complaint Code -->
+						<span class="pl-sm-5"><b>Complaint Code</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
@@ -131,67 +115,66 @@ i.css {
 										<i class="fa fa-id-card grey-text"></i>
 									</div>
 								</div>
-								<input type="text" name="username" class="form-control"
-									placeholder="Enter Username"
-									value="<%=DataUtility.getStringData(dto.getUsername())%>">
+								<input type="text" name="complaintCode" class="form-control"
+									placeholder="Enter Complaint Code"
+									value="<%=DataUtility.getStringData(dto.getComplaintCode())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("username", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("complaintCode", request)%>
 						</font><br>
 
-						<!-- Password -->
-						<span class="pl-sm-5"><b>Password</b><span
+						<!-- Complaint Title -->
+						<span class="pl-sm-5"><b>Complaint Title</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-lock grey-text"></i>
+										<i class="fa fa-file text grey-text"></i>
 									</div>
 								</div>
-								<input type="password" name="password" class="form-control"
-									placeholder="Enter Password"
-									value="<%=DataUtility.getStringData(dto.getPassword())%>">
+								<input type="text" name="complaintTitle" class="form-control"
+									placeholder="Enter Complaint Title"
+									value="<%=DataUtility.getStringData(dto.getComplaintTitle())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("password", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("complaintTitle", request)%>
 						</font><br>
 
-						<!-- Birth Date -->
-						<span class="pl-sm-5"><b>Birth Date</b><span
+						<!-- Raised By -->
+						<span class="pl-sm-5"><b>Raised By</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-calendar grey-text"></i>
+										<i class="fa fa-user grey-text"></i>
 									</div>
 								</div>
-								<input type="text" id="datepicker2" name="birthDate"
-									class="form-control" readonly="readonly"
-									placeholder="Select Birth Date"
-									value="<%=DataUtility.getDateString(dto.getBirthDate())%>">
+								<input type="text" name="raisedBy" class="form-control"
+									placeholder="Enter Raised By"
+									value="<%=DataUtility.getStringData(dto.getRaisedBy())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("birthDate", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("raisedBy", request)%>
 						</font><br>
+						
+						<% HashMap map =(HashMap) request.getAttribute("map"); %>
 
-						<!-- Contact No -->
-						<span class="pl-sm-5"><b>Contact No</b><span
+						<!-- Complaint Status -->
+						<span class="pl-sm-5"><b>Complaint Status</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">
-										<i class="fa fa-phone grey-text"></i>
+										<i class="fa fa-info-circle grey-text"></i>
 									</div>
 								</div>
-								<input type="text" name="contactNo" class="form-control"
-									placeholder="Enter Contact Number"
-									value="<%=DataUtility.getStringData(dto.getContactNo())%>">
+							<%= HTMLUtility.getList("complaintStatus", dto.getComplaintStatus(), map) %>
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("contactNo", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("complaintStatus", request)%>
 						</font><br> <br>
 
 						<!-- Buttons -->
@@ -201,16 +184,17 @@ i.css {
 							%>
 							<input type="submit" name="operation"
 								class="btn btn-success btn-md"
-								value="<%=EmployeeCtl.OP_UPDATE%>"> <input type="submit"
-								name="operation" class="btn btn-warning btn-md"
-								value="<%=EmployeeCtl.OP_CANCEL%>">
+								value="<%=ComplaintCtl.OP_UPDATE%>"> <input
+								type="submit" name="operation" class="btn btn-warning btn-md"
+								value="<%=ComplaintCtl.OP_CANCEL%>">
 							<%
 								} else {
 							%>
 							<input type="submit" name="operation"
-								class="btn btn-success btn-md" value="<%=EmployeeCtl.OP_SAVE%>">
+								class="btn btn-success btn-md" value="<%=ComplaintCtl.OP_SAVE%>">
 							<input type="submit" name="operation"
-								class="btn btn-warning btn-md" value="<%=EmployeeCtl.OP_RESET%>">
+								class="btn btn-warning btn-md"
+								value="<%=ComplaintCtl.OP_RESET%>">
 							<%
 								}
 							%>

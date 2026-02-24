@@ -1,26 +1,20 @@
-<%@page import="com.rays.controller.EmployeeCtl"%>
+<%@page import="com.rays.controller.LeaveManagmentCtl"%>
 <%@page import="com.rays.util.ServletUtility"%>
 <%@page import="com.rays.util.DataUtility"%>
+<%@page import="com.rays.controller.ORSView"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+	pageEncoding="ISO-8859-1"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Employee View</title>
+<title>Leave Management View</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
-i.css {
-	border: 2px solid #8080803b;
-	padding-left: 10px;
-	padding-bottom: 11px;
-	background-color: #ebebe0;
-}
-
 .p4 {
 	background-image: url('<%=ORSView.APP_CONTEXT%>/img/user1.jpg');
 	background-repeat: no-repeat;
@@ -39,11 +33,11 @@ i.css {
 	</div>
 
 	<main>
-	<form action="<%=ORSView.EMPLOYEE_CTL%>" method="post">
+	<form action="<%=ORSView.LEAVE_MANAGMENT_CTL%>" method="post">
 
 		<div class="row pt-3 pb-4">
 
-			<jsp:useBean id="dto" class="com.rays.dto.EmployeeDTO"
+			<jsp:useBean id="dto" class="com.rays.dto.LeaveManagmentDTO"
 				scope="request" />
 
 			<div class="col-md-4 mb-4"></div>
@@ -56,11 +50,11 @@ i.css {
 							long id = DataUtility.getLong(request.getParameter("id"));
 							if (id > 0) {
 						%>
-						<h3 class="text-center text-primary">Update Employee</h3>
+						<h3 class="text-center text-primary">Update Leave</h3>
 						<%
 							} else {
 						%>
-						<h3 class="text-center text-primary">Add Employee</h3>
+						<h3 class="text-center text-primary">Add Leave</h3>
 						<%
 							}
 						%>
@@ -103,95 +97,69 @@ i.css {
 						<input type="hidden" name="modifiedDatetime"
 							value="<%=DataUtility.getTimestamp(dto.getModifiedDatetime())%>">
 
-						<!-- Full Name -->
-						<span class="pl-sm-5"><b>Full Name</b><span
+						<!-- Leave Code -->
+						<span class="pl-sm-5"><b>Leave Code</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-user grey-text"></i>
-									</div>
-								</div>
-								<input type="text" name="fullName" class="form-control"
-									placeholder="Enter Full Name"
-									value="<%=DataUtility.getStringData(dto.getFullName())%>">
+								<input type="text" name="leaveCode" class="form-control"
+									placeholder="Enter Leave Code"
+									value="<%=DataUtility.getStringData(dto.getLeaveCode())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("fullName", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("leaveCode", request)%>
 						</font><br>
 
-						<!-- Username -->
-						<span class="pl-sm-5"><b>Username</b><span
+						<!-- Employee Name -->
+						<span class="pl-sm-5"><b>Employee Name</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-id-card grey-text"></i>
-									</div>
-								</div>
-								<input type="text" name="username" class="form-control"
-									placeholder="Enter Username"
-									value="<%=DataUtility.getStringData(dto.getUsername())%>">
+								<input type="text" name="employeeName" class="form-control"
+									placeholder="Enter Employee Name"
+									value="<%=DataUtility.getStringData(dto.getEmployeeName())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("username", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("employeeName", request)%>
 						</font><br>
 
-						<!-- Password -->
-						<span class="pl-sm-5"><b>Password</b><span
+						<!-- Leave Start Date -->
+						<span class="pl-sm-5"><b>Leave Start Date</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-lock grey-text"></i>
-									</div>
-								</div>
-								<input type="password" name="password" class="form-control"
-									placeholder="Enter Password"
-									value="<%=DataUtility.getStringData(dto.getPassword())%>">
+								<input type="text" id="datepicker2" name="leaveStartDate" class="form-control" readonly="readonly"
+									placeholder="Select Date"
+									value="<%=DataUtility.getStringData(dto.getLeaveStartDate())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("password", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("leaveStartDate", request)%>
 						</font><br>
 
-						<!-- Birth Date -->
-						<span class="pl-sm-5"><b>Birth Date</b><span
+						<!-- Leave End Date -->
+						<span class="pl-sm-5"><b>Leave End Date</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-calendar grey-text"></i>
-									</div>
-								</div>
-								<input type="text" id="datepicker2" name="birthDate"
-									class="form-control" readonly="readonly"
-									placeholder="Select Birth Date"
-									value="<%=DataUtility.getDateString(dto.getBirthDate())%>">
+								<input type="text" id="datepicker" name="leaveEndDate" class="form-control" readonly="readonly"
+									placeholder="Select Date"
+									value="<%=DataUtility.getStringData(dto.getLeaveEndDate())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("birthDate", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("leaveEndDate", request)%>
 						</font><br>
 
-						<!-- Contact No -->
-						<span class="pl-sm-5"><b>Contact No</b><span
+						<!-- Leave Status -->
+						<span class="pl-sm-5"><b>Leave Status</b><span
 							style="color: red">*</span></span><br>
 						<div class="col-sm-12">
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-phone grey-text"></i>
-									</div>
-								</div>
-								<input type="text" name="contactNo" class="form-control"
-									placeholder="Enter Contact Number"
-									value="<%=DataUtility.getStringData(dto.getContactNo())%>">
+								<input type="text" name="leaveStatus" class="form-control"
+									placeholder="Enter Leave Status"
+									value="<%=DataUtility.getStringData(dto.getLeaveStatus())%>">
 							</div>
 						</div>
-						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("contactNo", request)%>
+						<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("leaveStatus", request)%>
 						</font><br> <br>
 
 						<!-- Buttons -->
@@ -201,16 +169,17 @@ i.css {
 							%>
 							<input type="submit" name="operation"
 								class="btn btn-success btn-md"
-								value="<%=EmployeeCtl.OP_UPDATE%>"> <input type="submit"
-								name="operation" class="btn btn-warning btn-md"
-								value="<%=EmployeeCtl.OP_CANCEL%>">
+								value="<%=LeaveManagmentCtl.OP_UPDATE%>"> <input
+								type="submit" name="operation" class="btn btn-warning btn-md"
+								value="<%=LeaveManagmentCtl.OP_CANCEL%>">
 							<%
 								} else {
 							%>
 							<input type="submit" name="operation"
-								class="btn btn-success btn-md" value="<%=EmployeeCtl.OP_SAVE%>">
-							<input type="submit" name="operation"
-								class="btn btn-warning btn-md" value="<%=EmployeeCtl.OP_RESET%>">
+								class="btn btn-success btn-md"
+								value="<%=LeaveManagmentCtl.OP_SAVE%>"> <input
+								type="submit" name="operation" class="btn btn-warning btn-md"
+								value="<%=LeaveManagmentCtl.OP_RESET%>">
 							<%
 								}
 							%>

@@ -134,6 +134,8 @@ public abstract class BaseCtl extends HttpServlet{
             // messages
 
             if (!validate(request)) {
+            	
+            	System.out.println("8888888888");
                 BaseDTO dto = (BaseDTO) populateDTO(request);
                 ServletUtility.setDto(dto, request);
                 ServletUtility.forward(getView(), request, response);

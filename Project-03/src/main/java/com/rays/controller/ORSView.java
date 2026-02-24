@@ -138,5 +138,20 @@ public interface ORSView {
 	public String EMPLOYEE_CTL = APP_CONTEXT + "/ctl/EmployeeCtl";
 
 	public String EMPLOYEE_LIST_CTL = APP_CONTEXT + "/ctl/EmployeeListCtl";
+	
+	
+	public String LEAVE_MANAGMENT_VIEW = PAGE_FOLDER + "/LeaveManagmentView.jsp";
+	
+	public String LEAVE_MANAGMENT_LIST_VIEW = PAGE_FOLDER + "/LeaveManagmentListView.jsp";
+	
+	public String LEAVE_MANAGMENT_CTL = APP_CONTEXT + "/ctl/LeaveManagmentCtl";
+	
+	public String LEAVE_MANAGMENT_LIST_CTL = APP_CONTEXT + "/ctl/LeaveManagmentListCtl";
+	
+	
+	public static final String COMPLAINT_VIEW = PAGE_FOLDER + "/ComplaintView.jsp";
+	public static final String COMPLAINT_CTL = APP_CONTEXT + "/ctl/ComplaintCtl";
+	public static final String COMPLAINT_LIST_CTL = APP_CONTEXT + "/ctl/ComplaintListCtl";
+	public static final String COMPLAINT_LIST_VIEW = PAGE_FOLDER + "/ComplaintListView.jsp";
 
 }

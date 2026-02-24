@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20-Feb-2026, 12:05:12 PM by Hibernate Tools 3.5.0.Final -->
+
+<hibernate-mapping package="com.rays.dto">
+	<class name="LeaveManagmentDTO" table="ST_LEAVEMANAGMENT">
+		 <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+		<property name="employeeName" type="java.lang.String">
+			<column name="EMPLOYEENAME" />
+		</property>
+		<property name="leaveEndDate" type="java.time.LocalDate">
+			<column name="LEAVEENDDATE" />
+		</property>
+		<property name="leaveCode" type="java.lang.String">
+			<column name="LEAVECODE" />
+		</property>
+		<property name="leaveStatus" type="java.lang.String">
+			<column name="LEAVESTATUS" />
+		</property>
+		<property name="leaveStartDate" type="java.time.LocalDate">
+			<column name="LEAVESTARTDATE" />
+		</property>
+		<property name="createdBy" type="java.lang.String"
+			length="50">
+			<column name="CREATED_BY" />
+		</property>
+		<property name="modifiedBy" type="java.lang.String"
+			length="50">
+			<column name="MODIFIED_BY" />
+		</property>
+		<property name="createdDatetime" type="java.sql.Timestamp">
+			<column name="CREATED_DATETIME" />
+		</property>
+		<property name="modifiedDatetime" type="java.sql.Timestamp">
+			<column name="MODIFIED_DATETIME" />
+		</property>
+	</class>
+</hibernate-mapping>
